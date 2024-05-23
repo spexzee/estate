@@ -31,6 +31,10 @@ export default function Profile() {
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const [password, setPassword] = useState(false)
+
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(2);
+
   const dispatch = useDispatch();
 
 
@@ -291,7 +295,7 @@ export default function Profile() {
           <h1 className='text-center mt-7 text-2xl font-semibold'>
             Your Listings
           </h1>
-          {userListings.map((listing) => (
+          {userListings.slice(start , end).map((listing) => (
             <div
               key={listing._id}
               className="max-w-sm rounded overflow-hidden shadow-lg"
@@ -330,7 +334,26 @@ export default function Profile() {
               </div>
             </div>
           ))}
+          <div className='flex justify-center items-center mt-4'>
+            <button onClick={()=>{
+              setStart(start - 2)
+              setEnd(end - 2)
+            }} 
+            disabled={start===0}
+            className='text-blue-700 uppercase mr-2 bg-blue-200 hover:bg-blue-300 font-bold py-2 px-4 rounded'>
+              Previous
+            </button>
 
+
+            <button onClick={()=>{
+              setStart(start + 2)
+              setEnd(end + 2)
+            }} 
+            disabled={end===userListings.length}
+            className='text-blue-700 uppercase bg-blue-200 hover:bg-blue-300  font-bold py-2 px-4 rounded'>
+              Next
+            </button>
+          </div>
           
         </div>
       )}

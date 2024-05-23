@@ -9,3 +9,6 @@ input:disabled{
     background-color: transparent;
     border: .1px solid rgba(114, 114, 114, 0.263);
 }
+button:disabled{
+    cursor: not-allowed;
+}
